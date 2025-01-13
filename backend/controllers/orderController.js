@@ -3,28 +3,28 @@ const Order = require("./../models/Order");
 const Food = require("../models/Food");
 
 exports.placeOrder = async (req, res) => {
-  const { items } = req.body; // User will pass only items (foodId and quantity)
+  const { items } = req.body; 
 
   try {
     if (!req.user || !req.user.id) {
       return res.status(401).json({ message: "Unauthorized: User not authenticated" });
     }
 
-    // Calculate totalAmount dynamically
+    
     let totalAmount = 0;
 
     for (const item of items) {
-      // Fetch the food item from the database
+      
       const food = await Food.findById(item.foodId);
       if (!food) {
         return res.status(404).json({ message: `Food item with ID ${item.foodId} not found` });
       }
 
-      // Add the cost of the current item to the total amount
+     
       totalAmount += food.price * item.quantity;
     }
 
-    // Create the order with the calculated totalAmount
+    
     const order = await Order.create({
       userId: req.user.id,
       items,
@@ -39,9 +39,9 @@ exports.placeOrder = async (req, res) => {
 };
 
 exports.getUserOrders = async (req, res) => {
-  const { userId } = req.params; // Get userId from route params
+  const { userId } = req.params; 
   try {
-    // Fetch orders for the specified user ID
+    
     const orders = await Order.find({ userId });
     if (!orders.length) {
       return res.status(404).json({ message: "No orders found for this user" });
@@ -56,7 +56,7 @@ exports.getUserOrders = async (req, res) => {
 
 exports.getAllOrders = async (req, res) => {
   try {
-    // Fetch all orders
+    
     const orders = await Order.find().populate("userId", "username email").populate("items.foodId");
     res.status(200).json(orders);
   } catch (error) {

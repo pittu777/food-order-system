@@ -9,7 +9,7 @@ const foodSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-    enum: ["Appetizers", "Main Course", "Desserts", "Beverages"], // Add more categories as needed
+    enum: ["Appetizers", "Main Course", "Desserts", "Beverages"],
   },
   price: {
     type: Number,

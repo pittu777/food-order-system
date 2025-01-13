@@ -1,22 +1,25 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
+const Food = require("../models/Food");
+
+
 exports.adminLogin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Find the user
+    
     const user = await User.findOne({ email });
     if (!user || !(await user.matchPassword(password))) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // Check if the user is an admin
+
     if (user.role !== "admin") {
       return res.status(403).json({ message: "Access denied: Not an admin" });
     }
 
-    // Generate a JWT token
+    
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
@@ -33,18 +36,18 @@ exports.adminRegister = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
-    // Check if the user already exists
+    
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "Admin with this email already exists" });
     }
 
-    // Create a new admin user
+    
     const admin = await User.create({
       username,
       email,
       password,
-      role: "admin", // Explicitly set the role to "admin"
+      role: "admin",
     });
 
     res.status(201).json({ message: "Admin registered successfully", admin });
@@ -57,7 +60,7 @@ exports.adminRegister = async (req, res) => {
 
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password"); // Exclude passwords from the response
+    const users = await User.find().select("-password");
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -67,7 +70,7 @@ exports.getAllUsers = async (req, res) => {
 
 
 exports.deleteUser = async (req, res) => {
-  const { id } = req.params; // Get the user ID from the request parameters
+  const { id } = req.params; 
 
   try {
     const user = await User.findByIdAndDelete(id);
@@ -82,7 +85,6 @@ exports.deleteUser = async (req, res) => {
 };
 
 
-const Food = require("../models/Food");
 
 exports.getAllFoodItems = async (req, res) => {
   try {
