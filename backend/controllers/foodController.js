@@ -10,9 +10,9 @@ exports.getAllFoods = async (req, res) => {
 };
 
 exports.addFood = async (req, res) => {
-  const { name, category, price, availability } = req.body;
+  const { name, category, price, availability, imageUrl } = req.body;
   try {
-    const food = await Food.create({ name, category, price, availability });
+    const food = await Food.create({ name, category, price, availability, imageUrl });
     res.status(201).json(food);
   } catch (error) {
     res.status(400).json({ error: error.message });
