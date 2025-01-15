@@ -1,12 +1,14 @@
 import React from 'react'
 import FoodList from './FoodList';
+import { useAuth } from '../../context/AuthContext';
 
 const Home = () => {
+  const { user } = useAuth();
   return (
     <div className="container mx-auto px-4 py-6">
       
       <div className="text-center mb-6">
-        <h1 className="text-4xl font-bold mb-2">Welcome to Foodie's Paradise!</h1>
+        <h1 className="text-4xl font-bold mb-2">Welcome to Foodie's Paradise!{user?.username}</h1>
         <p className="text-lg text-gray-600">What would you like to order today?</p>
       </div>
 
@@ -58,7 +60,7 @@ const Home = () => {
       </div>
 
       <FoodList/>
-
+      
       {/* Footer */}
       <footer className="text-center text-gray-500 mt-8">
         <p>&copy; {new Date().getFullYear()} Foodie's Paradise. All rights reserved.</p>

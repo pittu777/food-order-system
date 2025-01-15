@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+
 const NavBar = () => {
   const { isAuthenticated, user, logout } = useAuth(); // Accessing user authentication status and user info
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const handleLogout = ()=>{
+
+  const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/login');  // Redirect to the login page after logging out
   }
+
+  console.log(user);
 
   return (
     <>
@@ -31,7 +35,7 @@ const NavBar = () => {
               <Link to="/cart" className="hover:text-gray-300">Cart</Link>
             </li>
             <li>
-              <Link to="/orders" className="hover:text-gray-300">Orders</Link>
+              <Link to="/order-summary" className="hover:text-gray-300">Orders</Link>
             </li>
 
             {/* Conditional rendering based on isAuthenticated */}
@@ -40,7 +44,7 @@ const NavBar = () => {
                 <div className="flex items-center">
                   {/* User logo or profile */}
                   <span className="mr-2">Welcome, {user?.username}</span>
-                  <button onClick={logout} className="hover:text-gray-300">Logout</button>
+                  <button onClick={handleLogout} className="hover:text-gray-300">Logout</button>
                 </div>
               </li>
             ) : (
@@ -85,13 +89,13 @@ const NavBar = () => {
               <Link to="/cart" className="block hover:text-gray-300">Cart</Link>
             </li>
             <li>
-              <Link to="/orders" className="block hover:text-gray-300">Orders</Link>
+              <Link to="/order-summary" className="block hover:text-gray-300">Orders</Link>
             </li>
 
             {/* Conditional rendering based on isAuthenticated */}
             {isAuthenticated ? (
               <li>
-                <button onClick={logout} className="block hover:text-gray-300">Logout</button>
+                <button onClick={handleLogout} className="block hover:text-gray-300">Logout</button>
               </li>
             ) : (
               <li>
