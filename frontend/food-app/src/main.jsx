@@ -7,6 +7,8 @@ import { FoodProvider } from './context/FoodContext.jsx'
 import { CartProvider } from './context/CartContext.jsx'
 import { OrderProvider } from './context/OrderContext.jsx'
 import { BrowserRouter } from 'react-router-dom'
+import { AdminProvider } from './context/AdminContext.jsx'
+
 
 
 createRoot(document.getElementById('root')).render(
@@ -16,7 +18,12 @@ createRoot(document.getElementById('root')).render(
     <CartProvider>
       <FoodProvider>
         <OrderProvider>
+          <AdminProvider>
+
+
           <App />
+          </AdminProvider>
+          
         </OrderProvider>
       </FoodProvider>
     </CartProvider>

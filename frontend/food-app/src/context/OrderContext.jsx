@@ -46,10 +46,7 @@ export const OrderProvider = ({ children }) => {
       setLoading(false);
     }
   };
-  const storedUser = localStorage.getItem('user');
-  const user = storedUser ? JSON.parse(storedUser) : null; 
-        const userId = user?.id; 
-
+  
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -75,7 +72,7 @@ export const OrderProvider = ({ children }) => {
     };
 
     fetchOrders();
-  }, [userId]);
+  }, []);
   
 
   return (

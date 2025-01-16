@@ -22,17 +22,16 @@ const authReducer = (state, action) => {
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
-      
       const user = JSON.parse(localStorage.getItem('user'));
       dispatch({ type: 'LOGIN_SUCCESS', payload: { user, token } });
     }
   }, []);
 
   const login = (user, token) => {
+    console.log(user);
     localStorage.setItem('authToken', token);
     localStorage.setItem('user', JSON.stringify(user));
     dispatch({ type: 'LOGIN_SUCCESS', payload: { user, token } });
@@ -42,8 +41,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
     dispatch({ type: 'LOGOUT' });
-
-   
     if (state.user?.id) {
       localStorage.removeItem(`cart-${state.user.id}`);
     }
@@ -65,3 +62,5 @@ export const useAuth = () => {
 };
 
 export default AuthContext;
+
+

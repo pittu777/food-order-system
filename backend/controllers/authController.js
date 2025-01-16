@@ -26,6 +26,7 @@ exports.loginUser = async (req, res) => {
         id:user._id,
         username:user.username,
         emial:user.email,
+        role:user.role,
       },
      });
   } catch (error) {

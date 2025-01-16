@@ -10,29 +10,18 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate(); // Initialize useNavigate hook
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const { token, user } = await loginUser(email, password);
-  //     console.log("loggedin user", user)
-  //     login(user, token); 
-  //     navigate('/');
-  //   } catch (err) {
-  //     setError(err.response?.data?.message || 'Something went wrong');
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const { token, user } = await loginUser(email, password);
-      console.log('API Response:', { token, user }); // Check if 'user' and 'token' are coming as expected
-      login(user, token); // Pass user and token to login method
+      console.log("loggedin user", user)
+      login(user, token); 
       navigate('/');
     } catch (err) {
-      console.error('Login Error:', err);
       setError(err.response?.data?.message || 'Something went wrong');
     }
   };
+ 
   
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-10 p-4 border rounded shadow">

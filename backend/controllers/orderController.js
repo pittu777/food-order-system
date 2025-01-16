@@ -114,9 +114,26 @@ exports.getAllOrders = async (req, res) => {
   try {
     
     const orders = await Order.find().populate("userId", "username email").populate("items.foodId");
-    res.status(200).json(orders);
+    res.status(200).json({orders});
   } catch (error) {
     console.error("Error fetching all orders:", error.message);
     res.status(500).json({ error: error.message });
+  }
+};
+
+
+
+exports.deleteOrder = async (req, res) => {
+  const { orderId } = req.params;
+
+  try {
+    const order = await Order.findByIdAndDelete(orderId); // Delete order by its ID
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+    res.status(200).json({ message: 'Order deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
   }
 };

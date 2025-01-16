@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const Order = require("../models/Order");
 
 const Food = require("../models/Food");
 
@@ -24,7 +25,14 @@ exports.adminLogin = async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.status(200).json({ token });
+    res.status(200).json({ token,
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        role: user.role, // Include role as well
+      },
+     });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -32,29 +40,29 @@ exports.adminLogin = async (req, res) => {
 
 
 
-exports.adminRegister = async (req, res) => {
-  const { username, email, password } = req.body;
+// exports.adminRegister = async (req, res) => {
+//   const { username, email, password } = req.body;
 
-  try {
+//   try {
     
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: "Admin with this email already exists" });
-    }
+//     const existingUser = await User.findOne({ email });
+//     if (existingUser) {
+//       return res.status(400).json({ message: "Admin with this email already exists" });
+//     }
 
     
-    const admin = await User.create({
-      username,
-      email,
-      password,
-      role: "admin",
-    });
+//     const admin = await User.create({
+//       username,
+//       email,
+//       password,
+//       role: "admin",
+//     });
 
-    res.status(201).json({ message: "Admin registered successfully", admin });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+//     res.status(201).json({ message: "Admin registered successfully", admin });
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// };
 
 
 
@@ -94,3 +102,26 @@ exports.getAllFoodItems = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
+exports.updateOrderStatus = async (req, res) => {
+  const { orderId } = req.params;
+  const { status } = req.body; // 'Pending', 'Processing', 'Completed', etc.
+
+  try {
+    const order = await Order.findByIdAndUpdate(
+      orderId,
+      { status },
+      { new: true } // Returns the updated document
+    );
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+    res.status(200).json(order);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
