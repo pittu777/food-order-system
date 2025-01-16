@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate, useLocat
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoginPage from './pages/LoginPage'
-import ProtectedRoute from './components/ProtectedRoute'
+
 import { useAuth } from './context/AuthContext'
 import Cart from './components/cart/FoodCart'
 import CheckoutPage from './components/checkout/CheckoutPage'

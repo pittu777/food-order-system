@@ -8,15 +8,19 @@ const Cart = () => {
     decrementQuantity,
     removeFromCart,
     clearCart,
-    calculateTotalPrice,
+    totalPrice,
   } = useCart();
   const navigate = useNavigate();
 
-  const handleCheckout=()=>{
-    navigate("/checkout")
-  }
-console.log(cart);
-  const totalPrice = calculateTotalPrice();
+  console.log(totalPrice);
+
+  const handleCheckout = () => {
+    if (totalPrice > 0) {
+      navigate("/checkout");
+    } else {
+      alert("Your cart is empty. Cannot proceed to checkout.");
+    }
+  };
 
   return (
     <div className="p-4">
@@ -67,11 +71,16 @@ console.log(cart);
               Clear Cart
             </button>
             <button
-        onClick={handleCheckout}
-        className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
-      >
-        Proceed to Checkout
-      </button>
+              onClick={handleCheckout}
+              className={`mt-4 w-full py-2 px-4 rounded-lg ${
+                totalPrice === 0
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-500 text-white hover:bg-blue-600"
+              }`}
+              disabled={totalPrice === 0}
+            >
+              {totalPrice === 0 ? "Cannot Proceed to Checkout" : "Proceed to Checkout"}
+            </button>
           </div>
         </div>
       ) : (

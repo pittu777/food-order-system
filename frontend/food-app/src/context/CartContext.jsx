@@ -10,7 +10,6 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    
     if (user?.id) {
       const cartData = localStorage.getItem(`cart-${user.id}`);
       if (cartData) {
@@ -19,14 +18,12 @@ export const CartProvider = ({ children }) => {
         setCart([]);
       }
     } else {
-     
       setCart([]);
     }
   }, [user?.id]); 
 
   useEffect(() => {
     if (user?.id) {
-      
       localStorage.setItem(`cart-${user.id}`, JSON.stringify(cart));
     }
   }, [cart, user?.id]);
@@ -80,6 +77,9 @@ export const CartProvider = ({ children }) => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
+  // Calculate total price and check if it's 0
+  const totalPrice = calculateTotalPrice();
+
   return (
     <CartContext.Provider
       value={{
@@ -90,6 +90,7 @@ export const CartProvider = ({ children }) => {
         removeFromCart,
         clearCart,
         calculateTotalPrice,
+        totalPrice, // Expose totalPrice to be used in Cart component
       }}
     >
       {children}

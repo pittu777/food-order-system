@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCart } from "../../context/CartContext";
 import { useOrder } from "../../context/OrderContext";
+import { useNavigate } from "react-router-dom";
+
 const CheckoutPage = () => {
-  const { cart, calculateTotalPrice } = useCart(); 
+  const { cart, calculateTotalPrice, clearCart } = useCart(); 
   const { handlePlaceOrder, loading } = useOrder();
   const [address, setAddress] = useState("");
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    if (cart.length === 0) {
+      navigate("/", { replace: true });
+    }
+  }, [cart, navigate]);
+
 
   const handleSubmitOrder = () => {
     if (!address.trim()) {
@@ -12,6 +23,8 @@ const CheckoutPage = () => {
       return;
     }
     handlePlaceOrder(address);
+    clearCart();
+    navigate("order-summary", {replace:true});
   };
 
   return (

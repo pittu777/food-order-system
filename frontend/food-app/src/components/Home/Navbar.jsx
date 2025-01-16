@@ -30,9 +30,9 @@ const NavBar = () => {
           <li>
             <Link to="/" className="hover:text-indigo-300 transition duration-300">Home</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/menu" className="hover:text-indigo-300 transition duration-300">Menu</Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/cart" className="hover:text-indigo-300 transition duration-300">Cart</Link>
           </li>
@@ -80,9 +80,9 @@ const NavBar = () => {
           <li>
             <Link to="/" className="block hover:text-indigo-300 transition duration-300">Home</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/menu" className="block hover:text-indigo-300 transition duration-300">Menu</Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/cart" className="block hover:text-indigo-300 transition duration-300">Cart</Link>
           </li>
