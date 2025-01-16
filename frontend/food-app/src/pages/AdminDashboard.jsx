@@ -9,7 +9,7 @@ const AdminDashboard = () => {
         <h2 className="text-3xl font-semibold text-center">Admin Dashboard</h2>
       </div>
       <div className="flex flex-col md:flex-row">
-        {/* Sidebar */}
+        
         <nav className="bg-gray-800 text-white w-full md:w-1/4 h-full md:min-h-screen p-4">
           <ul className="space-y-4">
             <li>

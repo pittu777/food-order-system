@@ -26,12 +26,12 @@ app.use(helmet());
 app.use(morgan("combined"));
 app.use(compression());
 
-// const limiter = rateLimit({
-//   windowMs: 15 * 60 * 1000,
-//   max: 200,
-//   message: "Too many requests from this IP, please try again later."
-// });
-// app.use(limiter);
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: "Too many requests from this IP, please try again later."
+});
+app.use(limiter);
 
 app.disable("x-powered-by");
 

@@ -22,21 +22,21 @@ const AllFoodItems = () => {
   }, [dispatch]);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-    <h3 className="text-2xl font-semibold text-center text-gray-800 mb-6">
+    <div className="min-h-screen bg-gray-50 p-6">
+    <h3 className="text-3xl font-semibold text-center text-gray-800 mb-8">
       All Food Items
     </h3>
     <div className="max-w-6xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {foodItems.map((food) => (
           <div
             key={food._id}
-            className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200"
+            className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow duration-300"
           >
             <img
               src={food.imageUrl}
               alt={food.name}
-              className="w-full h-48 object-cover"
+              className="w-full h-56 sm:h-64 object-cover"
             />
             <div className="p-4">
               <h4 className="text-lg font-semibold text-gray-700">{food.name}</h4>

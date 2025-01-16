@@ -20,12 +20,12 @@ const NavBar = () => {
     <>
      <nav className="bg-indigo-600 text-white shadow-lg">
       <div className="container mx-auto px-4 py-5 flex justify-between items-center">
-        {/* Logo */}
+        
         <Link to="/" className="text-3xl font-extrabold text-white hover:text-indigo-300 transition duration-300">
           🍔 FoodOrder
         </Link>
 
-        {/* Desktop Menu */}
+        
         <ul className="hidden md:flex space-x-8 text-lg flex items-center">
           <li>
             <Link to="/" className="hover:text-indigo-300 transition duration-300">Home</Link>
@@ -52,7 +52,7 @@ const NavBar = () => {
           )}
         </ul>
 
-        {/* Mobile Menu Button */}
+       
         <button
           className="md:hidden focus:outline-none"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -74,7 +74,7 @@ const NavBar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      
       {isMenuOpen && (
         <ul className="md:hidden bg-indigo-700 space-y-4 p-4 text-lg">
           <li>

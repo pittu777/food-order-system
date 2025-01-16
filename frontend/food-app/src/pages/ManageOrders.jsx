@@ -8,7 +8,6 @@ const ManageOrders = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const ordersPerPage = 10;
 
-  // Fetch all orders
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -29,7 +28,6 @@ console.log('Orders:', response.data.orders);
 
  
 
-  // Change order status
   const changeOrderStatus = async (orderId, newStatus) => {
     try {
       const response = await apiClient.put(`admin/orders/${orderId}/status`, { status: newStatus });
@@ -46,7 +44,7 @@ console.log('Orders:', response.data.orders);
     try {
       await apiClient.delete(`/orders/${orderId}`);
       toast.success('Order deleted successfully!');
-      setOrders(orders.filter((order) => order._id !== orderId)); // Remove deleted order from state
+      setOrders(orders.filter((order) => order._id !== orderId));
     } catch (error) {
       console.error('Error deleting order:', error);
       toast.error('Failed to delete order.');
@@ -54,7 +52,6 @@ console.log('Orders:', response.data.orders);
   };
 
 
-  // Pagination logic
   const currentOrders = orders.slice(
     (currentPage - 1) * ordersPerPage,
     currentPage * ordersPerPage
@@ -68,42 +65,45 @@ console.log('Orders:', response.data.orders);
   if (!loading && orders.length === 0) return <div>No orders found!</div>;
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
-        <h3 className="text-2xl font-semibold text-gray-800 mb-6">Manage Orders</h3>
-        <div className="space-y-4">
+    <>
+  <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-xl p-8">
+        <h3 className="text-3xl font-semibold text-gray-800 mb-8">Manage Orders</h3>
+        <div className="space-y-6">
           {currentOrders.map((order) => (
-            <div key={order._id} className="border-b py-4">
+            <div key={order._id} className="border-b pb-6">
               <div className="flex justify-between items-center">
-                <div>
-                  <p className="font-semibold">Order ID: {order._id}</p>
-                  <p>Status: {order.status}</p>
-                  <p>Total: ${order.totalAmount.toFixed(2)}</p>
-                  <p>
-  Items:{' '}
-  {order.items.map((item) => (
-    <span key={item._id}>
-      {item.quantity}x {item.foodName || item.foodId?._id || 'Food ID not found'}
-    </span>
-  ))}
-</p>
+                <div className="w-2/3">
+                  <p className="text-lg font-semibold text-gray-700">Order ID: {order._id}</p>
+                  <p className="text-sm text-gray-600">Status: <span className="font-medium text-blue-600">{order.status}</span></p>
+                  <p className="text-sm text-gray-600">Total: <span className="font-semibold">${order.totalAmount.toFixed(2)}</span></p>
+                  <p className="text-sm text-gray-600">Address: <span className="font-semibold">{order.address}</span></p>
+
+                  <p className="text-sm text-gray-600">Items:</p>
+                  <div className="space-y-1">
+                    {order.items.map((item) => (
+                      <span key={item._id} className="block text-sm text-gray-600">
+                        {item.quantity}x {item.foodName || item.foodId?._id || 'Food ID not found'}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div>
-                  {/* Dropdown to change status */}
+                <div className="w-1/3 text-right">
+                  
                   <select
                     value={order.status}
                     onChange={(e) => changeOrderStatus(order._id, e.target.value)}
-                    className="border-gray-300 p-2 rounded-md text-gray-700 focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-2 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
                   >
                     <option value="Pending">Pending</option>
                     <option value="Processing">Processing</option>
                     <option value="Completed">Completed</option>
                     <option value="Cancelled">Cancelled</option>
                   </select>
-                  {/* Delete Button */}
+                  
                   <button
                     onClick={() => deleteOrder(order._id)}
-                    className="ml-4 text-red-500"
+                    className="text-sm text-red-600 hover:text-red-700 focus:outline-none"
                   >
                     Delete
                   </button>
@@ -112,14 +112,16 @@ console.log('Orders:', response.data.orders);
             </div>
           ))}
         </div>
-        {/* Pagination */}
-        <div className="mt-4">
+        
+        <div className="mt-6 flex justify-center space-x-2">
           {Array.from({ length: Math.ceil(orders.length / ordersPerPage) }, (_, i) => (
             <button
               key={i}
               onClick={() => handlePageChange(i + 1)}
-              className={`px-3 py-1 mx-1 rounded ${
-                currentPage === i + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'
+              className={`px-4 py-2 rounded-lg text-lg font-medium ${
+                currentPage === i + 1
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-blue-500 hover:text-white'
               }`}
             >
               {i + 1}
@@ -128,6 +130,7 @@ console.log('Orders:', response.data.orders);
         </div>
       </div>
     </div>
+              </>
   );
 };
 

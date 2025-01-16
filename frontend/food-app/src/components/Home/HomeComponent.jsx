@@ -10,7 +10,7 @@ const HomeComponent = () => {
 
   return (
     <div className="container mx-auto px-6 py-8">
-      {/* Welcome Section */}
+      
       <div className="text-center mb-12">
         <h1 className="text-4xl font-extrabold text-gray-900 mb-4">
           Welcome to Foodie's Paradise, {user?.username}!
@@ -20,7 +20,7 @@ const HomeComponent = () => {
         </p>
       </div>
 
-      {/* Categories Section */}
+    
       <div className="mb-12">
         <h2 className="text-3xl font-semibold text-gray-800 mb-6">Explore Categories</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
@@ -43,25 +43,85 @@ const HomeComponent = () => {
         </div>
       </div>
 
-      {/* Special Offers Section */}
+      
       <div className="mb-12 bg-purple-100 p-8 rounded-xl shadow-lg text-center">
         <h3 className="text-2xl font-semibold text-purple-700 mb-4">Special Offers</h3>
         <p className="text-xl text-gray-800">Get 20% off on your first order! Use code: <span className="font-bold text-blue-600">WELCOME20</span></p>
       </div>
 
-      {/* Recommended Section */}
+     
       <div className="mb-12">
         <h2 className="text-3xl font-semibold text-gray-800 mb-6">Recommended for You</h2>
         <FoodList />
       </div>
 
-      {/* Food List Section */}
-     
-
-      {/* Footer Section */}
-      <footer className="text-center text-gray-600 mt-12 border-t pt-6">
-        <p>&copy; {new Date().getFullYear()} Foodie's Paradise. All rights reserved.</p>
-      </footer>
+    
+      
+<footer class="relative bg-blueGray-200 pt-8 pb-6">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap text-left lg:text-left">
+      <div class="w-full lg:w-6/12 px-4">
+        <h4 class="text-3xl fonat-semibold text-blueGray-700">Let's keep in touch!</h4>
+        <h5 class="text-lg mt-0 mb-2 text-blueGray-600">
+          Find us on any of these platforms, we respond 1-2 business days.
+        </h5>
+        <div class="mt-6 lg:mb-0 mb-6">
+          <button class="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+            <i class="fab fa-twitter"></i></button><button class="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+            <i class="fab fa-facebook-square"></i></button><button class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+            <i class="fab fa-dribbble"></i></button><button class="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+            <i class="fab fa-github"></i>
+          </button>
+        </div>
+      </div>
+      <div class="w-full lg:w-6/12 px-4">
+        <div class="flex flex-wrap items-top mb-6">
+          <div class="w-full lg:w-4/12 px-4 ml-auto">
+            <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Useful Links</span>
+            <ul class="list-unstyled">
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="#">About Us</a>
+              </li>
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="#">Blog</a>
+              </li>
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="#">Github</a>
+              </li>
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="#">Free Products</a>
+              </li>
+            </ul>
+          </div>
+          <div class="w-full lg:w-4/12 px-4">
+            <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Other Resources</span>
+            <ul class="list-unstyled">
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="#">MIT License</a>
+              </li>
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="#">Terms &amp; Conditions</a>
+              </li>
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="#">Privacy Policy</a>
+              </li>
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="#">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="my-6 border-blueGray-300"/>
+    <div class="flex flex-wrap items-center md:justify-between justify-center">
+      <div class="w-full md:w-4/12 px-4 mx-auto text-center">
+      <p>&copy; {new Date().getFullYear()} Foodie's Paradise. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+      
     </div>
   );
 };

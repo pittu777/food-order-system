@@ -30,7 +30,7 @@ exports.adminLogin = async (req, res) => {
         id: user._id,
         username: user.username,
         email: user.email,
-        role: user.role, // Include role as well
+        role: user.role,
       },
      });
   } catch (error) {
@@ -106,13 +106,13 @@ exports.getAllFoodItems = async (req, res) => {
 
 exports.updateOrderStatus = async (req, res) => {
   const { orderId } = req.params;
-  const { status } = req.body; // 'Pending', 'Processing', 'Completed', etc.
+  const { status } = req.body;
 
   try {
     const order = await Order.findByIdAndUpdate(
       orderId,
       { status },
-      { new: true } // Returns the updated document
+      { new: true }
     );
     if (!order) {
       return res.status(404).json({ message: 'Order not found' });

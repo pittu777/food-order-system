@@ -24,15 +24,14 @@ const DeleteFoodItems = () => {
 
 const handleDeleteFood = async (id) => {
     try {
-      // Ensure the URL format is correct
+     
       await axios.delete(`http://localhost:5000/api/foods/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
   
-      // Dispatch local state update (optimistic UI update)
+      
       dispatch({ type: 'DELETE_FOOD_ITEM', payload: id });
   
-      // Show success toast
       toast.success('Food item deleted successfully!');
     } catch (error) {
       console.error('Error deleting food item:', error);

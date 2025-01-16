@@ -25,8 +25,8 @@ const foodSchema = new mongoose.Schema({
     default: Date.now,
   },
   imageUrl: {
-    type: String,  // Store image URL as a string
-    required: true, // Make it optional, you can modify based on requirements
+    type: String,  
+    required: true,
   },
 });
 

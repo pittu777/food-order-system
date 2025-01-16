@@ -50,9 +50,9 @@ const FoodList = () => {
               {food.availability ? "Available" : "Out of Stock"}
             </p>
             <button
-              onClick={() => handleAddToCart(food)} // Add to cart with toast
+              onClick={() => handleAddToCart(food)}
               className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
-              disabled={!food.availability} // Disable button if not available
+              disabled={!food.availability}
             >
               Add to Cart
             </button>
